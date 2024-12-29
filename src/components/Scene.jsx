@@ -4,7 +4,7 @@ import {
   MapControls,
   useHelper,
 } from "@react-three/drei";
-import React, { useLayoutEffect, useRef, useState } from "react";
+import React, { useLayoutEffect, useRef } from "react";
 import Maps from "./modelComponents/Maps";
 import { Physics } from "@react-three/rapier";
 import CharacterControls from "./CharacterControls";
@@ -12,7 +12,7 @@ import LightBulbEffect from "./LightBulbEffect";
 import OfficeLamp from "./modelComponents/DeskLamp";
 import Cheese from "./modelComponents/Cheese";
 
-const Scene = () => {
+const Scene = ({ onVictory }) => {
   const dirLight = useRef();
 
   // Helpers
@@ -61,10 +61,11 @@ const Scene = () => {
         {/* <perspectiveCamera ref={shadowCameraRef} attach="shadow-camera" /> */}
       </directionalLight>
       <Physics>
+        {/* <Physics debug> */}
         <Maps />
         <CharacterControls />
+        <Cheese onVictory={onVictory} />
       </Physics>
-      <Cheese />
       <OfficeLamp />
       <LightBulbEffect />
     </>

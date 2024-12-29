@@ -13,6 +13,8 @@ export function Maps(props) {
 
   return (
     <RigidBody type="fixed" colliders="trimesh" position={[-0.2, -0.25, 9.15]}>
+      {/* center position for testing purposes */}
+      {/* <RigidBody type="fixed" colliders="trimesh" position={[-0.2, -0.25, -0.9]}> */}
       <group {...props} dispose={null}>
         <mesh
           castShadow

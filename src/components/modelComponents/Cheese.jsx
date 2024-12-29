@@ -11,8 +11,9 @@ Title: Just Cheese
 import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
+import { CuboidCollider, RigidBody } from "@react-three/rapier";
 
-export function Cheese(props) {
+export function Cheese({ onVictory, props }) {
   const rotationAxis = useRef();
   useFrame(() => {
     rotationAxis.current.rotation.y += 0.01;
@@ -20,28 +21,44 @@ export function Cheese(props) {
 
   const { nodes, materials } = useGLTF("/cheese-transformed.glb");
   return (
-    <group
-      {...props}
-      dispose={null}
-      ref={rotationAxis}
-      position={[-0.4, -0.4, 8.9]}
-      scale={0.13}
-    >
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.Object_4.geometry}
-        material={materials.Cheese}
-        position={[0.006, 0.381, -0.459]}
+    <RigidBody type="fixed" colliders={false}>
+      <group
+        {...props}
+        dispose={null}
+        ref={rotationAxis}
+        position={[-0.4, -0.4, 8.9]}
+        // center position for testing purposes
+        // position={[-0.5, -0.25, -1.3]}
+        scale={0.13}
+      >
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Object_4.geometry}
+          material={materials.Cheese}
+          position={[0.006, 0.381, -0.459]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Object_5.geometry}
+          material={materials.material_0}
+          position={[0.006, 0.381, -0.459]}
+        />
+      </group>
+      <CuboidCollider
+        sensor
+        args={[0.65, 0.65, 0.65]}
+        position={[-0.45, 0.17, 8.9]}
+        // center position for testing purposes
+        // position={[-0.5, -0.25, -1.3]}
+        onIntersectionEnter={() => {
+          // console.log("Mousey Wins!");
+          onVictory();
+        }}
       />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.Object_5.geometry}
-        material={materials.material_0}
-        position={[0.006, 0.381, -0.459]}
-      />
-    </group>
+      /
+    </RigidBody>
   );
 }
 
