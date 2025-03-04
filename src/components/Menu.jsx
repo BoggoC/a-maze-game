@@ -11,9 +11,9 @@ const Menu = ({ onStart }) => {
           <h1 className="title">A-MAZE-GAME</h1>
           <div className="text">
             <p className="text-blocks">
-              Bad person in a white coat put Mousey in a green enclosure without
-              a roof, filled with paths with dead ends. Mousey is so annoyed.
-              But Mousey smells cheese! Delicious, stinky cheese! Is it{" "}
+              A bad person in a white coat put Mousey in a green enclosure
+              without a roof, filled with paths with dead ends. Mousey is so
+              annoyed. But Mousey smells cheese! Delicious, stinky cheese! Is it{" "}
               <b>Swiss</b>? <b>Gouda</b>? <b>Blue</b>? <b>Pecorino</b>?{" "}
               <b>Munster</b>? Who cares? They're all delicious! Mousey can't
               wait to find it. Mousey must find it!

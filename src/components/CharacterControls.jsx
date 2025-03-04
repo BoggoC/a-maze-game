@@ -31,7 +31,8 @@ const lerpAngle = (start, end, t) => {
 const CharacterControls = () => {
   const walk_speed = 0.3;
   const run_speed = 0.8;
-  const rotation = degToRad(0.75);
+  // const rotation = degToRad(0.75);
+  const rotation = degToRad(1);
   const { controls } = useContext(ControlContext);
   const [animation, setAnimation] = useState("happyIdle");
   const rigidBody = useRef();
