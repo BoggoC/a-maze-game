@@ -1,18 +1,18 @@
 import {
   PerspectiveCamera,
   Environment,
-  MapControls,
+  OrbitControls,
   useHelper,
 } from "@react-three/drei";
 import React, { useLayoutEffect, useRef } from "react";
-import Maps from "./modelComponents/Maps";
 import { Physics } from "@react-three/rapier";
+import Maps from "./modelComponents/Maps";
 import CharacterControls from "./CharacterControls";
 import LightBulbEffect from "./LightBulbEffect";
-import OfficeLamp from "./modelComponents/DeskLamp";
+import OfficeLamp from "./modelComponents/OfficeLamp";
 import Cheese from "./modelComponents/Cheese";
 
-const Scene = ({ onVictory }) => {
+const Scene = ({ onVictory, setCharacterPosition }) => {
   const dirLight = useRef();
 
   // Helpers
@@ -26,7 +26,7 @@ const Scene = ({ onVictory }) => {
 
   return (
     <>
-      <MapControls
+      <OrbitControls
         enableDamping={true}
         dampingFactor={0.05}
         enableZoom={false}
@@ -63,7 +63,7 @@ const Scene = ({ onVictory }) => {
       <Physics>
         {/* <Physics debug> */}
         <Maps />
-        <CharacterControls />
+        <CharacterControls setCharacterPosition={setCharacterPosition} />
         <Cheese onVictory={onVictory} />
       </Physics>
       <OfficeLamp />

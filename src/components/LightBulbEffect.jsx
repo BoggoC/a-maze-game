@@ -1,25 +1,27 @@
-import { EffectComposer, GodRays } from "@react-three/postprocessing";
-import React, { useRef, useEffect, useState } from "react";
+import { EffectComposer, Bloom } from "@react-three/postprocessing";
+import React, { useEffect, useState } from "react";
 
 const LightBulbEffect = () => {
-  const lightBulb = useRef();
-  const [isLightBulbReady, setIsLightBulbReady] = useState(false);
+  const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    if (lightBulb.current) {
-      setIsLightBulbReady(true);
-    }
-  }, [lightBulb.current]);
+    const timer = setTimeout(() => {
+      setReady(true);
+    }, 100);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <>
-      <mesh ref={lightBulb} position={[15, 7, 18]}>
-        <sphereGeometry args={[1, 64, 64]} />
-        <meshBasicMaterial color="white" transparent opacity={1} />
-      </mesh>
-      {isLightBulbReady && (
-        <EffectComposer>
-          <GodRays sun={lightBulb.current} samples={50} blur={true} />
+      {ready && (
+        <EffectComposer multisampling={8}>
+          <Bloom
+            mipmapBlur={true}
+            intensity={10}
+            luminanceThreshold={0.95}
+            luminanceSmoothing={0.035}
+          />
         </EffectComposer>
       )}
     </>

@@ -28,7 +28,7 @@ const lerpAngle = (start, end, t) => {
   return normalizeAngle(start + (end - start) * t);
 };
 
-const CharacterControls = () => {
+const CharacterControls = ({ setCharacterPosition }) => {
   const walk_speed = 0.3;
   const run_speed = 0.8;
   // const rotation = degToRad(0.75);
@@ -101,6 +101,13 @@ const CharacterControls = () => {
       );
 
       rigidBody.current.setLinvel(velocity, true);
+
+      // Update position state
+      const position = {
+        x: rigidBody.current.translation().x,
+        z: rigidBody.current.translation().z,
+      };
+      setCharacterPosition(position);
     }
 
     // CAMERA
@@ -128,14 +135,9 @@ const CharacterControls = () => {
         <group ref={character}>
           <Character
             scale={0.002}
-            position={[0, -0.229, 0]} // OG
+            position={[0, -0.228, 0]}
             animation={animation}
           />
-          {/* Sphere above character */}
-          {/* <mesh position={[0, 24, 0]}>
-            <sphereGeometry args={[0.1, 36, 15]} />
-            <meshBasicMaterial color="red" />
-          </mesh> */}
         </group>
       </group>
       <CapsuleCollider args={[0.08, 0.05]} position={[0, -0.1, 0]} />

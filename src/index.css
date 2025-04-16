@@ -55,6 +55,44 @@ h5 {
   font-size: clamp(0.875rem, 1.5vw, 1.5rem);
 }
 
+/* CANVAS ELEMENTS */
+.container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.canvas {
+  position: absolute !important;
+  top: 0px;
+  left: 0px;
+  width: 100vw;
+  height: 100vh;
+}
+
+.view1 {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.view2 {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: calc(250px - 2em);
+  height: calc(250px - 2em);
+}
+
+.fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+}
+
 /* MOBILE CONTROLS */
 
 .btns {
@@ -107,7 +145,6 @@ h5 {
   position: fixed;
   display: flex;
   flex-flow: column;
-  /* color: #bbf7d0; */
   color: #dcfce7;
   width: 100%;
   height: 100%;
@@ -167,12 +204,13 @@ h5 {
   background-color: #22c55e;
 }
 
-.canvas {
+.menu-canvas {
   flex: 1 1 auto;
   padding: 0 0 5px;
 }
 
 /* VICTORY MENU */
+
 .victory-menu {
   position: fixed;
   top: 5%;

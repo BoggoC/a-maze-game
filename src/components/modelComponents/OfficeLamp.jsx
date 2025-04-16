@@ -10,8 +10,12 @@ Title: Desk Lamp Low Poly
 import React from "react";
 import { useGLTF } from "@react-three/drei";
 
-export function DeskLamp(props) {
+export function OfficeLamp(props) {
   const { nodes, materials } = useGLTF("/officeLamp-transformed.glb");
+
+  if (materials.lamp) {
+    materials.lamp.emissive.set("#ffffff");
+  }
 
   return (
     <group
@@ -50,4 +54,4 @@ export function DeskLamp(props) {
 
 useGLTF.preload("/officeLamp-transformed.glb");
 
-export default DeskLamp;
+export default OfficeLamp;

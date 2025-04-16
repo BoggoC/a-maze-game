@@ -25,8 +25,9 @@ const Menu = ({ onStart }) => {
               when a <u className="underlined">keyboard</u> is present or the{" "}
               <b className="bold">joystick</b> to move and{" "}
               <b className="bold">button</b> to run when using a{" "}
-              <u className="underlined">touchscreen device</u>.
-              {/* Click or press on the mini-map to expand it. */}
+              <u className="underlined">touchscreen device</u>. Click or press
+              on the <b className="bold">mini-map</b> to expand it and again to
+              contract it.
             </p>
             <div className="btn-container">
               <button onClick={onStart} className="btn ">
@@ -35,7 +36,7 @@ const Menu = ({ onStart }) => {
             </div>
           </div>
         </div>
-        <div className="canvas">
+        <div className="menu-canvas">
           <Canvas
             shadows
             camera={{
