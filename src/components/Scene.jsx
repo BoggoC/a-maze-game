@@ -4,15 +4,19 @@ import {
   OrbitControls,
   useHelper,
 } from "@react-three/drei";
-import React, { useLayoutEffect, useRef } from "react";
+import React, { useLayoutEffect, useRef, useState } from "react";
 import { Physics } from "@react-three/rapier";
+import { Vector3 } from "three";
 import Maps from "./modelComponents/Maps";
 import CharacterControls from "./CharacterControls";
 import LightBulbEffect from "./LightBulbEffect";
 import OfficeLamp from "./modelComponents/OfficeLamp";
 import Cheese from "./modelComponents/Cheese";
+import VictoryMenu from "./VictoryMenu";
 
 const Scene = ({ onVictory, setCharacterPosition }) => {
+  const [isVictory, setIsVictory] = useState(false);
+  const [orbitTarget, setOrbitTarget] = useState(new Vector3(0, 0, 0));
   const dirLight = useRef();
 
   // Helpers
@@ -24,13 +28,23 @@ const Scene = ({ onVictory, setCharacterPosition }) => {
     dirLight.current.target.updateMatrixWorld();
   }, []);
 
+  const handleVictory = () => {
+    setIsVictory(true);
+    onVictory();
+  };
+
   return (
     <>
       <OrbitControls
         enableDamping={true}
         dampingFactor={0.05}
-        enableZoom={false}
-        enableRotate={false}
+        enableZoom={isVictory}
+        enableRotate={isVictory}
+        maxDistance={isVictory ? 1.5 : undefined}
+        minDistance={isVictory ? 0.5 : undefined}
+        minPolarAngle={isVictory ? 0 : undefined}
+        maxPolarAngle={isVictory ? Math.PI / 2 : undefined}
+        target={orbitTarget}
       />
       <Environment preset="sunset" />
       <PerspectiveCamera
@@ -63,9 +77,14 @@ const Scene = ({ onVictory, setCharacterPosition }) => {
       <Physics>
         {/* <Physics debug> */}
         <Maps />
-        <CharacterControls setCharacterPosition={setCharacterPosition} />
-        <Cheese onVictory={onVictory} />
+        <CharacterControls
+          setCharacterPosition={setCharacterPosition}
+          isVictory={isVictory}
+          setOrbitTarget={setOrbitTarget}
+        />
+        <Cheese onVictory={handleVictory} />
       </Physics>
+      {isVictory && <VictoryMenu />}
       <OfficeLamp />
       <LightBulbEffect />
     </>

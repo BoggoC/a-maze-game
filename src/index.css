@@ -208,26 +208,3 @@ h5 {
   flex: 1 1 auto;
   padding: 0 0 5px;
 }
-
-/* VICTORY MENU */
-
-.victory-menu {
-  position: fixed;
-  top: 5%;
-  left: 50%;
-  transform: translateX(-50%);
-  color: #dcfce7;
-  background-color: #164e00;
-  z-index: 1000;
-  border-radius: 12px;
-}
-
-.victory-menu-container {
-  max-width: 530px;
-  margin-inline: auto;
-  padding: 0 8px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}

@@ -11,10 +11,11 @@ Title: Just Cheese
 import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
-import { CuboidCollider, RigidBody } from "@react-three/rapier";
+import { Physics, CuboidCollider, RigidBody } from "@react-three/rapier";
 
 export function Cheese({ onVictory, props }) {
   const rotationAxis = useRef();
+
   useFrame(() => {
     rotationAxis.current.rotation.y += 0.01;
   });
@@ -27,8 +28,6 @@ export function Cheese({ onVictory, props }) {
         dispose={null}
         ref={rotationAxis}
         position={[-0.4, -0.4, 8.9]}
-        // center position for testing purposes
-        // position={[-0.5, -0.25, -1.3]}
         scale={0.13}
       >
         <mesh
@@ -50,14 +49,11 @@ export function Cheese({ onVictory, props }) {
         sensor
         args={[0.65, 0.65, 0.65]}
         position={[-0.45, 0.17, 8.9]}
-        // center position for testing purposes
-        // position={[-0.5, -0.25, -1.3]}
         onIntersectionEnter={() => {
           // console.log("Mousey Wins!");
           onVictory();
         }}
       />
-      /
     </RigidBody>
   );
 }

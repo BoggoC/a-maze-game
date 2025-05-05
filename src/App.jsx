@@ -7,7 +7,6 @@ import IsTouchDevice from "./components/IsTouchDevice";
 import Scene from "./components/Scene";
 import MiniMap from "./components/MiniMap";
 import Menu from "./components/Menu";
-import VictoryMenu from "./components/VictoryMenu";
 
 const keyboardMap = [
   { name: "forward", keys: ["ArrowUp", "KeyW"] },
@@ -57,23 +56,24 @@ const App = () => {
                   />
                 </Bounds>
               </View>
-              <View
-                index={2}
-                className={`view2 ${isMiniMapFullscreen ? "fullscreen" : ""}`}
-              >
-                <Bounds fit clip margin={0.75}>
-                  <MiniMap
-                    characterPosition={characterPosition}
-                    onClick={handleMiniMapClick}
-                  />
-                </Bounds>
-              </View>
+              {!isVictory && (
+                <View
+                  index={2}
+                  className={`view2 ${isMiniMapFullscreen ? "fullscreen" : ""}`}
+                >
+                  <Bounds fit clip margin={0.75}>
+                    <MiniMap
+                      characterPosition={characterPosition}
+                      onClick={handleMiniMapClick}
+                    />
+                  </Bounds>
+                </View>
+              )}
               <Canvas eventSource={ref} className="canvas" shadows>
                 <View.Port />
               </Canvas>
             </div>
           )}
-          {isVictory && <VictoryMenu />}
         </Suspense>
       </KeyboardControls>
     </ControlProvider>
