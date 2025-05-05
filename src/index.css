@@ -139,6 +139,14 @@ h5 {
   background-color: rgba(255, 255, 255, 0.5);
 }
 
+.btns,
+.ui {
+  user-select: none;
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE/Edge */
+}
+
 /* MENU */
 
 .menu {

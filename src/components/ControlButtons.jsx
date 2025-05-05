@@ -74,8 +74,14 @@ const ControlButtons = () => {
         <button
           id="run-button"
           className="ui run"
-          onTouchStart={() => setControls({ ...controls, run: true })}
-          onTouchEnd={() => setControls({ ...controls, run: false })}
+          onTouchStart={(e) => {
+            e.preventDefault();
+            setControls({ ...controls, run: true });
+          }}
+          onTouchEnd={(e) => {
+            e.preventDefault();
+            setControls({ ...controls, run: false });
+          }}
         ></button>
       </div>
     </div>
